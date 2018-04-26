@@ -1,0 +1,10 @@
+---
+slug: :twemoji
+depends:
+  mikutter: 3.7.0
+  plugin:
+    - score
+version: '1.0'
+author: 
+name: twemoji
+description: mikutterでtwemojiを使って絵文字を表示するプラグインです

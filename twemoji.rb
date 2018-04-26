@@ -11,6 +11,10 @@ module Plugin::Twemoji
       Plugin.filtering(:photo_filter, url, [])[1].first
     end
 
+    def inspect
+      "twemoji(#{description.codepoints.to_s})"
+    end
+
     def perma_link
       url
     end
@@ -42,6 +46,9 @@ module Plugin::Twemoji
       end
       str = m.post_match
     end
+    if str.size > 0
+      score << str
+    end
 
     score
       .chunk { |fragment| fragment.class }
@@ -69,7 +76,8 @@ end
 Plugin.create(:twemoji) do
   filter_score_filter do |model, note, yielder|
     score = Plugin::Twemoji.parse(note.description)
-    if score.size > 1 || score.size == 1 && !score[1].is_a?(Plugin::Score::TextNote)
+    score
+    if score.size > 1 || score.size == 1 && !score[0].is_a?(Plugin::Score::TextNote)
       yielder << score
     end
     [model, note, yielder]

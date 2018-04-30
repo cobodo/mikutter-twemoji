@@ -15,8 +15,8 @@ module Plugin::Twemoji
       "twemoji(#{description.codepoints.to_s})"
     end
 
-    def perma_link
-      url
+    def path
+      "/#{url.host}/#{url.path}"
     end
   end
 
@@ -27,7 +27,7 @@ module Plugin::Twemoji
   @@ext = '.png'
 
   def genUrl(icon)
-    @@base_url + icon + @@ext
+    "#{@@base_url}#{icon}#{@@ext}"
   end
 
   def parse(str)
@@ -76,7 +76,6 @@ end
 Plugin.create(:twemoji) do
   filter_score_filter do |model, note, yielder|
     score = Plugin::Twemoji.parse(note.description)
-    score
     if score.size > 1 || score.size == 1 && !score[0].is_a?(Plugin::Score::TextNote)
       yielder << score
     end

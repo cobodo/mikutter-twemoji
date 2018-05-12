@@ -75,9 +75,11 @@ end
 
 Plugin.create(:twemoji) do
   filter_score_filter do |model, note, yielder|
-    score = Plugin::Twemoji.parse(note.description)
-    if score.size > 1 || score.size == 1 && !score[0].is_a?(Plugin::Score::TextNote)
-      yielder << score
+    if model != note
+      score = Plugin::Twemoji.parse(note.description)
+      if score.size > 1 || score.size == 1 && !score[0].is_a?(Plugin::Score::TextNote)
+        yielder << score
+      end
     end
     [model, note, yielder]
   end

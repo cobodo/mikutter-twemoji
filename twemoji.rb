@@ -68,7 +68,7 @@ module Plugin::Twemoji
       # fix non standard OSX behavior
       icon = icon[0] + icon[2]
     end
-    icon.split('').flat_map{|c| c.codepoints.map{|c| c.to_s(16).downcase } }.join('-')
+    icon.codepoints.map{|c| c.to_s(16).downcase }.join('-')
   end
 end
 

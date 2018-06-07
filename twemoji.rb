@@ -12,7 +12,7 @@ module Plugin::Twemoji
     end
 
     def inspect
-      "twemoji(#{description.codepoints.to_s})"
+      "twemoji(#{description.codepoints.map{|c| c.to_s(16) }})"
     end
 
     def path

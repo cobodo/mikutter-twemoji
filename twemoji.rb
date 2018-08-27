@@ -16,7 +16,7 @@ module Plugin::Twemoji
     end
 
     def path
-      "/#{url.host}/#{url.path}"
+      "/#{url.host}/#{url.path}?"
     end
   end
 

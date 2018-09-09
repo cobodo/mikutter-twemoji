@@ -3,6 +3,8 @@ module Plugin::Twemoji
   extend self
 
   class Twemoji < Diva::Model
+    extend Memoist
+
     register :score_twemoji, name: "Twemoji"
     field.string :description, required: true
     field.uri :url, required: true
